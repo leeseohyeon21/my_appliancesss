@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_appliances/start/intro_page.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -6,8 +7,13 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
-      body: Center(child: Text('로그인을 하십시오')),
+      backgroundColor: Colors.white,
+      body: PageView(children: [
+        IntroPage(),
+        Container(color: Colors.accents[2],),
+        Container(color: Colors.accents[5],),
+      ],
+      ),
     );
   }
 }
