@@ -1,6 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:my_appliances/screens/auth_screen.dart';
+import 'package:my_appliances/screens/start_screen.dart';
 import '../screens/home_screen.dart';
 
 class HomeLocation extends BeamLocation<BeamState>{
@@ -9,7 +9,7 @@ class HomeLocation extends BeamLocation<BeamState>{
     return [
       BeamPage(
         key: ValueKey('home'),
-        child: AuthScreen(),
+        child: StartScreen(),
         // child: HomeScreen(),
       ),
     ];

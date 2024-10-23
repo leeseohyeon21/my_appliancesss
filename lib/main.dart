@@ -1,7 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:my_appliances/router/locations.dart';
-import 'package:my_appliances/screens/auth_screen.dart';
+import 'package:my_appliances/screens/start_screen.dart';
 import 'package:my_appliances/screens/splash_screen.dart';
 import 'screens/home_screen.dart';
 
@@ -11,7 +11,7 @@ final _routerDelegate = BeamerDelegate(
   guards: [BeamGuard(
       pathPatterns: ['/'],
       check: (context, location) {return true;},
-      showPage: BeamPage(child: AuthScreen())
+      showPage: BeamPage(child: StartScreen())
   )],
 
   locationBuilder: BeamerLocationBuilder(
@@ -60,14 +60,27 @@ class MyAppliances extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       theme: ThemeData(
+        hintColor: Colors.grey[350],
         fontFamily: 'DoHyeon',
         primarySwatch: Colors.green, //앱의 기본 색상
         primaryColor: Colors.green,
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.green,
+            foregroundColor: Colors.white,
+            minimumSize: Size(48, 48)
+          ),
+        ),
         textTheme: TextTheme(
           headlineLarge: TextStyle(
             fontFamily: 'DoHyeon'),
             labelLarge: TextStyle(
               color: Colors.white),
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white,
+          titleTextStyle: TextStyle(color: Colors.black87),
+          elevation: 2,
         ),
       ),
       //theme: ThemeData(textTheme: TextTheme(displaySmall: TextStyle(fontFamily: 'DoHyeon'),),),

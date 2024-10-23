@@ -2,7 +2,9 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
 class IntroPage extends StatelessWidget {
-  const IntroPage({super.key});
+  PageController controller;
+
+  IntroPage(this.controller, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +36,15 @@ class IntroPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      controller.animateToPage(1, duration: Duration(milliseconds: 700), curve: Curves.easeOut);
+                    },
                     child: Text('로그인하고 시작하기',
                       style: Theme.of(context).textTheme.labelLarge,
                     ),
-                    style: TextButton.styleFrom(
-                      //backgroundColor: Colors.green),
-                      backgroundColor: Theme.of(context).primaryColor),
+                    //style: TextButton.styleFrom(
+                    //  //backgroundColor: Colors.green),
+                    //  backgroundColor: Theme.of(context).primaryColor),
                 ),
               ],
             ),
