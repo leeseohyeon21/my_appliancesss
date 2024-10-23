@@ -59,6 +59,18 @@ class MyAppliances extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      theme: ThemeData(
+        fontFamily: 'DoHyeon',
+        primarySwatch: Colors.green, //앱의 기본 색상
+        primaryColor: Colors.green,
+        textTheme: TextTheme(
+          headlineLarge: TextStyle(
+            fontFamily: 'DoHyeon'),
+            labelLarge: TextStyle(
+              color: Colors.white),
+        ),
+      ),
+      //theme: ThemeData(textTheme: TextTheme(displaySmall: TextStyle(fontFamily: 'DoHyeon'),),),
       debugShowCheckedModeBanner: false,
       routeInformationParser: BeamerParser(),
       routerDelegate: _routerDelegate,

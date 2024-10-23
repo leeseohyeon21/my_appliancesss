@@ -15,14 +15,17 @@ class IntroPage extends StatelessWidget {
             Text('나의 가전',
               style: TextStyle(
                   fontSize: 30,
+                  //fontFamily: 'DoHyeon',
                   fontWeight: FontWeight.bold,
                   color: Colors.green),
             ),
             ExtendedImage.asset('assets/images/temp.jpg'),
             Text('가전제품 기록 앱',
+              //style: Theme.of(context).textTheme.headlineSmall,
               style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500),
+                //color: Theme.of(context).colorScheme.primary,
+                fontSize: 24,
+                fontWeight: FontWeight.w500),
             ),
             Text('가정내 가전제품을 기록해 두고 효과적으로 관리해봐요.',
               style: TextStyle(fontSize: 13),
@@ -33,12 +36,12 @@ class IntroPage extends StatelessWidget {
                 TextButton(
                     onPressed: (){},
                     child: Text('로그인하고 시작하기',
-                    style: TextStyle(
-                      color: Colors.white),
+                      style: Theme.of(context).textTheme.labelLarge,
                     ),
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.green),
-                  )
+                    style: TextButton.styleFrom(
+                      //backgroundColor: Colors.green),
+                      backgroundColor: Theme.of(context).primaryColor),
+                ),
               ],
             ),
           ],
