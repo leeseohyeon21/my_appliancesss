@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_appliances/screens/auth_page.dart';
-import 'package:my_appliances/start/address_page.dart';
-import 'package:my_appliances/start/intro_page.dart';
+import 'package:my_appliances/screens/start/address_page.dart';
+import 'package:my_appliances/screens/start/auth_page.dart';
+import 'package:my_appliances/screens/start/intro_page.dart';
+import 'package:provider/provider.dart';
 
 class StartScreen extends StatelessWidget {
   //페이지 컨트롤러
@@ -11,16 +12,19 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: PageView(
-        controller: _pageController,
-        //physics: NeverScrollableScrollPhysics(),
-        children: [
-        IntroPage(_pageController),
-        AddressPage(),
-        AuthPage(),
-      ],
+    return Provider<PageController>.value(
+      value: _pageController,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: PageView(
+          controller: _pageController,
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            IntroPage(),
+            AuthPage(),
+            AddressPage(),
+          ],
+        ),
       ),
     );
   }

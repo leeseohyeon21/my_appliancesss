@@ -1,8 +1,11 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:my_appliances/router/locations.dart';
+import 'package:my_appliances/screens/start/auth_page.dart';
 import 'package:my_appliances/screens/start_screen.dart';
 import 'package:my_appliances/screens/splash_screen.dart';
+import 'package:my_appliances/states/user_provider.dart';
+import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
 
 final _routerDelegate = BeamerDelegate(
@@ -10,16 +13,20 @@ final _routerDelegate = BeamerDelegate(
   //pathPatterns: 방어하고 싶은 경로값, check: 조건 충족 여부
   guards: [BeamGuard(
       pathPatterns: ['/'],
-      check: (context, location) {return true;},
-      showPage: BeamPage(child: StartScreen())
-  )],
+      check: (context, location) {
+        final userState = context.read<UserProvider>().userState;
+        print("User state: $userState");
+        return userState;
+        },
+      showPage: BeamPage(child: StartScreen()))],
 
-  locationBuilder: BeamerLocationBuilder(
-      beamLocations: [HomeLocation()]
-  )
+      locationBuilder: BeamerLocationBuilder(
+          beamLocations: [HomeLocation()]
+      )
 );
 
 void main() {
+  Provider.debugCheckInvalidValueType = null;
   runApp(MyApp());
 }
 
@@ -45,64 +52,56 @@ class MyApp extends StatelessWidget {
     //   home: MyHomePage(),
     // );
   }
-}
 
-StatelessWidget _splashLodingWidget(AsyncSnapshot<Object> snapshot) {
-  if(snapshot.hasError) {print('에러가 발생하였습니다.'); return Text('Error');}
-  else if(snapshot.hasData) {return MyAppliances();}
-  else{return SplashScreen();}
-}
-
-class MyAppliances extends StatelessWidget {
-  const MyAppliances({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: ThemeData(
-        hintColor: Colors.grey[350],
-        fontFamily: 'DoHyeon',
-        primarySwatch: Colors.green, //앱의 기본 색상
-        primaryColor: Colors.green,
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(
-            backgroundColor: Colors.green,
-            foregroundColor: Colors.white,
-            minimumSize: Size(48, 48)
-          ),
-        ),
-        textTheme: TextTheme(
-          headlineLarge: TextStyle(
-            fontFamily: 'DoHyeon'),
-            labelLarge: TextStyle(
-              color: Colors.white),
-        ),
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.white,
-          titleTextStyle: TextStyle(color: Colors.black87),
-          elevation: 2,
-        ),
-      ),
-      //theme: ThemeData(textTheme: TextTheme(displaySmall: TextStyle(fontFamily: 'DoHyeon'),),),
-      debugShowCheckedModeBanner: false,
-      routeInformationParser: BeamerParser(),
-      routerDelegate: _routerDelegate,
-    );
+  StatelessWidget _splashLodingWidget(AsyncSnapshot<Object> snapshot) {
+    if(snapshot.hasError) {print('에러가 발생하였습니다.'); return Text('Error');}
+    else if(snapshot.hasData) {return MyAppliances();}
+    else{return SplashScreen();}
   }
 }
 
+class MyAppliances extends StatelessWidget {
+  const MyAppliances({Key? key}) : super(key: key);
 
-class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('나의 가전'),
-      ),
-      body: Center(
-        child: Column(
-          children: const <Widget>[Text('Hello'), Text('Hello'), Text('Hello')],
+    return ChangeNotifierProvider<UserProvider>(
+      create: (BuildContext context){
+        return UserProvider();
+      },
+      child: MaterialApp.router(
+        theme: ThemeData(
+          hintColor: Colors.grey[350],
+          fontFamily: 'DoHyeon',
+          primarySwatch: Colors.green, //앱의 기본 색상
+          primaryColor: Colors.green,
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.green,
+              foregroundColor: Colors.white,
+              minimumSize: Size(48, 48)
+            ),
+          ),
+          textTheme: TextTheme(
+            headlineLarge: TextStyle(
+              fontFamily: 'DoHyeon'),
+              labelLarge: TextStyle(
+                color: Colors.white),
+          ),
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.white,
+            titleTextStyle: TextStyle(color: Colors.black87, fontSize: 18, fontWeight: FontWeight.w700),
+            elevation: 2,
+            actionsIconTheme: IconThemeData(color: Colors.black),
+          ),
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            selectedItemColor: Colors.black87,
+            unselectedItemColor: Colors.black38,
+          )
         ),
+        debugShowCheckedModeBanner: false,
+        routeInformationParser: BeamerParser(),
+        routerDelegate: _routerDelegate,
       ),
     );
   }

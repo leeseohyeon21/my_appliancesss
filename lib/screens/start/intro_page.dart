@@ -1,13 +1,16 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:my_appliances/states/user_provider.dart';
+import 'package:my_appliances/utils/logger.dart';
 
 class IntroPage extends StatelessWidget {
-  PageController controller;
 
-  IntroPage(this.controller, {super.key});
+  IntroPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    logger.d('current user state: ${context.read<UserProvider>().userState}');
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -17,7 +20,6 @@ class IntroPage extends StatelessWidget {
             Text('나의 가전',
               style: TextStyle(
                   fontSize: 30,
-                  //fontFamily: 'DoHyeon',
                   fontWeight: FontWeight.bold,
                   color: Colors.green),
             ),
@@ -36,15 +38,15 @@ class IntroPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextButton(
-                    onPressed: (){
-                      controller.animateToPage(1, duration: Duration(milliseconds: 700), curve: Curves.easeOut);
+                    onPressed: () async {
+                      context.read<PageController>().animateToPage(
+                          1,
+                          duration: Duration(milliseconds: 700),
+                          curve: Curves.easeOut);
                     },
                     child: Text('로그인하고 시작하기',
                       style: Theme.of(context).textTheme.labelLarge,
                     ),
-                    //style: TextButton.styleFrom(
-                    //  //backgroundColor: Colors.green),
-                    //  backgroundColor: Theme.of(context).primaryColor),
                 ),
               ],
             ),

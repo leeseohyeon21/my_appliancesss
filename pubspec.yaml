@@ -38,6 +38,9 @@ dependencies:
   extended_image: ^9.0.4
   beamer: ^1.7.0
   flutter_multi_formatter: ^2.13.0
+  provider: ^6.1.2
+  logger: ^2.4.0
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +66,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
