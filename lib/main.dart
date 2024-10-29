@@ -83,10 +83,10 @@ class MyAppliances extends StatelessWidget {
             ),
           ),
           textTheme: TextTheme(
-            headlineLarge: TextStyle(
-              fontFamily: 'DoHyeon'),
-              labelLarge: TextStyle(
-                color: Colors.white),
+            headlineLarge: TextStyle(fontFamily: 'DoHyeon'),
+            titleLarge: TextStyle(fontSize: 17, color: Colors.black87),
+            titleMedium: TextStyle(fontSize: 13,color: Colors.black38),
+            labelLarge: TextStyle(color: Colors.white),
           ),
           appBarTheme: AppBarTheme(
             backgroundColor: Colors.white,
